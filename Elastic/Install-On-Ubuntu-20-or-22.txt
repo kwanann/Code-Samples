@@ -33,3 +33,13 @@ Generate an enrollment token for Elasticsearch nodes with
  sudo systemctl enable elasticsearch.service
 ### You can start elasticsearch service by executing
  sudo systemctl start elasticsearch.service
+
+
+#Install Kibana
+#Source: https://www.elastic.co/guide/en/kibana/current/deb.html
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+echo "deb https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-8.x.list
+sudo apt-get update && sudo apt-get install kibana
+
+#Generate Enrollment Token for Kibana
+/usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana
