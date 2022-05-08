@@ -1,0 +1,13 @@
+#Extending disk (when adding HDD space)
+growpart /dev/sda 3
+parted /dev/sda print free
+pvresize /dev/sda3
+lvextend -l +100%FREE /dev/mapper/ubuntu--vg-ubuntu--lv
+resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
+
+#Extending limit (space already allocated in disk)
+lvextend -l +100%FREE /dev/mapper/ubuntu--vg-ubuntu--lv
+resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
+
+#confirm disk extension
+df -h
