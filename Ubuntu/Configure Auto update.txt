@@ -1,0 +1,14 @@
+sudo apt install -y unattended-upgrades apt-listchanges bsd-mailx
+
+vi /etc/apt/apt.conf.d/50unattended-upgrades
+APPEND
+Unattended-Upgrade::Mail "[Your email address]";
+Unattended-Upgrade::Automatic-Reboot "true";
+
+vi /etc/apt/listchanges.conf
+APPEND
+email_address=[your email address]
+
+TEST
+apt update -y && apt upgrade -y
+unattended-upgrades --dry-run
